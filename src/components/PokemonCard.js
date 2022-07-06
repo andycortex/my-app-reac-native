@@ -1,7 +1,9 @@
 import { View, Dimensions, Text, StyleSheet, Image, TouchableWithoutFeedback } from 'react-native'
 import React from 'react';
-import getColorByPokemonType from '../utils/getColorByPokemonType';
 import { capitalize } from 'lodash';
+import { useNavigation } from '@react-navigation/native';
+import getColorByPokemonType from '../utils/getColorByPokemonType';
+
 
 
 var { height } = Dimensions.get('window'); 
@@ -10,10 +12,11 @@ var { height } = Dimensions.get('window');
     
 export default function PokemonCard(props) {
     const { pokemon } = props;
+    const navigation = useNavigation();
     const pokemonColor = getColorByPokemonType(pokemon.type);
     const bgStyles = { backgroundColor: pokemonColor, ...styles.bgStyles }
     const goToPokemon = () => {
-        console.log('Pokemon ->', pokemon.image);
+        navigation.navigate('PokemonScreen', { id: pokemon.id });
     }
   return (
     <View>
