@@ -1,11 +1,16 @@
-import { SafeAreaView, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
+import LoginForm from '../components/Auth/LoginForm';
+import useAuth from '../hooks/useAuth';
+import UserDetails from '../components/Auth/UserDetails';
 
 export default function AccountScreen() {
+  const { auth } = useAuth();
+  console.log(auth);
   return (
-    <SafeAreaView style={styles.container}>
-      <Text>AccountScreen</Text>
-    </SafeAreaView>
+    <View style={styles.container}>
+      {auth ? <UserDetails/> : <LoginForm/>}
+    </View>
   )
 }
 const styles = StyleSheet.create({
