@@ -6,7 +6,6 @@ import UserDetails from '../components/Auth/UserDetails';
 
 export default function AccountScreen() {
   const { auth } = useAuth();
-  console.log(auth);
   return (
     <View style={styles.container}>
       {auth ? <UserDetails/> : <LoginForm/>}

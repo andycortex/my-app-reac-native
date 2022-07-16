@@ -5,7 +5,6 @@ import { includes, pull } from 'lodash';
 export async function getPokemonFavoriteApi () {
     try {
         const response = await AsyncStorage.getItem(FAVORITE_STORAGE);
-        console.log(response)
         return JSON.parse(response || '[]');
     }catch (err) {
         throw err;
@@ -27,6 +26,16 @@ export async function isPokemonFavoriteApi(id) {
         const response = await getPokemonFavoriteApi();
         return includes(response, id);
     }catch (err) {
+        throw err;
+    }
+}
+
+export async function removePokemonFavoriteApi(id) {
+    try {
+        const favorite = await getPokemonFavoriteApi();
+        const newFavorites = pull(favorite, id);
+        await AsyncStorage.setItem(FAVORITE_STORAGE, JSON.stringify(newFavorites));
+    }catch(err) {
         throw err;
     }
 }
